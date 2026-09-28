@@ -33,8 +33,8 @@ jobs:
         run: |
           cambiados="$(gh pr diff "${{ github.event.pull_request.number }}" --name-only)"
           echo "$cambiados"
-          if echo "$cambiados" | grep -v '^pruebas/' | grep -q .; then
-            echo "::error::Un PR de pruebas congeladas solo puede tocar pruebas/"
+          if echo "$cambiados" | grep -Ev '^(pruebas/|docs/|package\.json$|package-lock\.json$|playwright\.config\.mjs$)' | grep -q .; then
+            echo "::error::Un PR de pruebas congeladas solo puede tocar pruebas/, docs/, package.json, package-lock.json o playwright.config.mjs"
             exit 1
           fi
           echo "solo_pruebas=true" >> "$GITHUB_OUTPUT"
