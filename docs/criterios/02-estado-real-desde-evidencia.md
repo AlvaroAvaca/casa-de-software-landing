@@ -2,8 +2,8 @@
 
 La sección "Estado real" no se escribe a mano: se genera desde el archivo docs/estado-real.json, donde cada fila tiene qué, estado, fecha y link de evidencia. Así la página no puede decir más que lo que tiene evidencia.
 
-- Issue: (se crea al existir el repo)
-- Prueba: pruebas/aceptacion/estado-real.spec.mjs y pruebas/unitarias/generar-estado.test.mjs
+- Issue: https://github.com/AlvaroAvaca/casa-de-software-landing/issues/3
+- Prueba: pruebas/aceptacion/estado-real.spec.mjs y pruebas/unitarias/estado-real.test.mjs
 
 ## Criterios
 1. Dado el archivo docs/estado-real.json con N filas, cuando se genera la página, entonces la tabla "Estado real" tiene exactamente N filas con el mismo texto, estado y link.

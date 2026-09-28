@@ -1,6 +1,6 @@
 # Funcionalidad 1: la página con el estilo elegido
 
-- Issue: (se crea al existir el repo)
+- Issue: https://github.com/AlvaroAvaca/casa-de-software-landing/issues/3
 - Prueba: pruebas/aceptacion/pagina.spec.mjs
 
 ## Criterios
