@@ -38,29 +38,3 @@ jobs:
             const previo = comentarios.find((c) => c.body && c.body.startsWith(marca));
             if (previo) await github.rest.issues.updateComment({ ...context.repo, comment_id: previo.id, body });
             else await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
-  desplegar:
-    # Publishes the gh-pages branch as the GitHub Pages site (production root plus PR previews) with the repo's own token.
-    name: Desplegar gh-pages en GitHub Pages
-    needs: vista-previa
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deploy.outputs.page_url }}
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: gh-pages
-      - name: Activar GitHub Pages si hace falta
-        uses: actions/configure-pages@v5
-        with:
-          enablement: true
-      - uses: actions/upload-pages-artifact@v3
-        with:
-          path: .
-      - id: deploy
-        uses: actions/deploy-pages@v4
