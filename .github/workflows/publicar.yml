@@ -1,0 +1,27 @@
+# Production publish: every push to main (a PR merged by the owner) publishes sitio/ to GitHub Pages and smoke-tests the public URL.
+name: Publicar
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  contents: write
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+jobs:
+  publicar:
+    name: Publicar en GitHub Pages y probar la URL pública
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Publicar a gh-pages (raíz)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: sh herramientas/publicar-pages.sh ""
+      - name: Prueba de humo en la URL pública
+        run: node herramientas/humo.mjs "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/"
