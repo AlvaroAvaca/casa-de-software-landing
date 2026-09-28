@@ -1,0 +1,7 @@
+[
+  { "que": "Arnés v3 (plantilla, reglas y juez)", "estado": "Verificado", "detalle": "el 28-09-2026", "evidencia": { "texto": "Corrida del juez en GitHub Actions (privado)", "url": "https://github.com/AlvaroAvaca/casa-de-software/actions/runs/36453113823" } },
+  { "que": "Landing: brief (Parada 1)", "estado": "Aprobado", "detalle": "por Álvaro el 28-09-2026", "evidencia": { "texto": "Registro de decisiones (privado)", "url": "https://github.com/AlvaroAvaca/casa-de-software/pull/2" } },
+  { "que": "Landing: propuesta (Parada 2)", "estado": "Pendiente", "detalle": "", "evidencia": null },
+  { "que": "Landing: publicación (Parada 4)", "estado": "Pendiente", "detalle": "", "evidencia": null },
+  { "que": "Programas para las empresas", "estado": "Cifra", "detalle": "0 entregados", "evidencia": null }
+]

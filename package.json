@@ -1,9 +1,12 @@
 {
-  "name": "sitio-de-la-casa",
+  "name": "casa-de-software-landing",
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "playwright test",
+    "test": "npm run test:unitarias && npm run test:aceptacion",
+    "test:unitarias": "node --test \"pruebas/unitarias/**/*.test.mjs\"",
+    "test:aceptacion": "playwright test",
+    "generar-estado": "node herramientas/generar-estado.mjs docs/estado-real.json sitio/index.html",
     "servir": "node herramientas/sirve.mjs",
     "test:informe": "playwright show-report"
   },
