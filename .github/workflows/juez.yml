@@ -1,0 +1,63 @@
+# The judge: runs the project's checks on a clean machine for every pull request.
+# The result is written by the machine, never by an AI.
+name: Juez
+on:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+  pull-requests: read
+concurrency:
+  group: juez-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  juez:
+    name: Juez (pruebas en máquina limpia)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - name: Instalación limpia
+        run: npm ci
+      - name: Navegador para Playwright
+        run: npx playwright install --with-deps chromium
+      - name: Pruebas congeladas en rojo (solo con la etiqueta y solo archivos de pruebas)
+        id: congeladas
+        if: github.event_name == 'pull_request' && contains(github.event.pull_request.labels.*.name, 'pruebas congeladas')
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cambiados="$(gh pr diff "${{ github.event.pull_request.number }}" --name-only)"
+          echo "$cambiados"
+          if echo "$cambiados" | grep -v '^pruebas/' | grep -q .; then
+            echo "::error::Un PR de pruebas congeladas solo puede tocar pruebas/"
+            exit 1
+          fi
+          echo "solo_pruebas=true" >> "$GITHUB_OUTPUT"
+      - name: Pruebas
+        if: steps.congeladas.outputs.solo_pruebas != 'true'
+        env:
+          CI: true
+        run: npm test
+      - name: Pruebas (se espera rojo porque la funcionalidad aún no existe)
+        if: steps.congeladas.outputs.solo_pruebas == 'true'
+        env:
+          CI: true
+        run: |
+          if npm test; then
+            echo "::error::Las pruebas congeladas ya pasan: no prueban nada nuevo"
+            exit 1
+          fi
+          echo "Rojo esperado confirmado."
+      - name: Informe
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: informe-playwright
+          path: playwright-report
+          retention-days: 7
+          if-no-files-found: ignore

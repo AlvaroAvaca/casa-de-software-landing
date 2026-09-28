@@ -1,0 +1,66 @@
+name: Encargo
+description: Un programa nuevo o una versión nueva. El Entrevistador llena las casillas con Álvaro, una pregunta a la vez.
+title: "[Encargo] "
+labels: ["encargo"]
+body:
+  - type: markdown
+    attributes:
+      value: "Casillas del brief. Cada una con su procedencia (respuesta de Álvaro, documento o decisión anterior). Sin datos reales de personas."
+  - type: textarea
+    id: para-quien
+    attributes:
+      label: 1. Para quién es y quién lo usará
+      description: Roles, no nombres reales.
+    validations:
+      required: true
+  - type: textarea
+    id: problema
+    attributes:
+      label: 2. Qué problema resuelve y cómo se hace hoy sin el programa
+    validations:
+      required: true
+  - type: textarea
+    id: imprescindible
+    attributes:
+      label: 3. Las 3 cosas que tiene que hacer sí o sí en la primera versión
+    validations:
+      required: true
+  - type: textarea
+    id: fuera
+    attributes:
+      label: 4. Qué queda fuera de la primera versión
+    validations:
+      required: true
+  - type: textarea
+    id: datos
+    attributes:
+      label: 5. Qué datos maneja y si alguno es de personas (Ley 21.719)
+    validations:
+      required: true
+  - type: dropdown
+    id: donde
+    attributes:
+      label: 6. Dónde se usará
+      options:
+        - Celular
+        - Escritorio
+        - Ambos
+    validations:
+      required: true
+  - type: textarea
+    id: exito
+    attributes:
+      label: 7. Cómo sabremos que funcionó (en palabras de Álvaro)
+    validations:
+      required: true
+  - type: textarea
+    id: restricciones
+    attributes:
+      label: 8. Restricciones (plazo, integraciones, sin gastos nuevos)
+  - type: checkboxes
+    id: confirmaciones
+    attributes:
+      label: Confirmaciones
+      options:
+        - label: Este encargo no incluye datos reales de personas.
+          required: true

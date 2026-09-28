@@ -1,0 +1,46 @@
+name: Funcionalidad
+description: Una tarea diminuta y exacta para un Constructor. La escribe el Arquitecto.
+title: "[Funcionalidad] "
+labels: ["funcionalidad"]
+body:
+  - type: textarea
+    id: objetivo
+    attributes:
+      label: Objetivo en una frase
+    validations:
+      required: true
+  - type: textarea
+    id: criterio
+    attributes:
+      label: Criterio de aceptación (Dado / Cuando / Entonces)
+      description: En español, legible por Álvaro. El Probador lo convierte en prueba antes del código.
+    validations:
+      required: true
+  - type: textarea
+    id: prueba
+    attributes:
+      label: Prueba de aceptación asociada
+      description: Ruta del archivo en pruebas/aceptacion/ y PR de "pruebas congeladas" que la trajo.
+    validations:
+      required: true
+  - type: textarea
+    id: permitidos
+    attributes:
+      label: Archivos permitidos
+      description: Rutas o patrones. El Constructor no toca nada fuera de esta lista.
+    validations:
+      required: true
+  - type: textarea
+    id: fuera
+    attributes:
+      label: Qué queda fuera
+  - type: dropdown
+    id: modelo
+    attributes:
+      label: Modelo y esfuerzo sugeridos
+      options:
+        - Haiku 4.5, bajo (mecánico)
+        - Sonnet 5, medio (por defecto)
+        - Sonnet 5, alto (delicado)
+    validations:
+      required: true

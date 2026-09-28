@@ -1,0 +1,31 @@
+name: Error
+description: Algo que no funciona en la vista previa o en producción.
+title: "[Error] "
+labels: ["error"]
+body:
+  - type: textarea
+    id: paso
+    attributes:
+      label: Qué pasó
+    validations:
+      required: true
+  - type: textarea
+    id: esperaba
+    attributes:
+      label: Qué esperaba que pasara
+    validations:
+      required: true
+  - type: textarea
+    id: reproducir
+    attributes:
+      label: Cómo reproducirlo, paso a paso
+    validations:
+      required: true
+  - type: input
+    id: donde
+    attributes:
+      label: Link de la vista previa o de producción
+  - type: textarea
+    id: evidencia
+    attributes:
+      label: Captura o mensaje de error (sin datos reales de personas)

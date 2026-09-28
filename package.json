@@ -1,0 +1,13 @@
+{
+  "name": "sitio-de-la-casa",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "servir": "node herramientas/sirve.mjs",
+    "test:informe": "playwright show-report"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.56.1"
+  }
+}

@@ -1,0 +1,19 @@
+name: Cambio
+description: Algo que Álvaro pidió a mitad de camino. Nadie lo edita desde el chat; entra por aquí.
+title: "[Cambio] "
+labels: ["cambio"]
+body:
+  - type: textarea
+    id: pedido
+    attributes:
+      label: Qué pidió Álvaro (sus palabras)
+    validations:
+      required: true
+  - type: textarea
+    id: porque
+    attributes:
+      label: Por qué
+  - type: textarea
+    id: impacto
+    attributes:
+      label: Impacto en criterios, estimación y plazo (lo llena el Arquitecto)
