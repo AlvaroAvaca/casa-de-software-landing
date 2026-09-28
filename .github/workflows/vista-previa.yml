@@ -1,0 +1,40 @@
+# PR preview: publishes sitio/ of the PR under pr-preview/pr-N/ in gh-pages and comments the link. Removed when the PR closes.
+name: Vista previa
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+permissions:
+  contents: write
+  pull-requests: write
+concurrency:
+  group: gh-pages
+  cancel-in-progress: false
+jobs:
+  vista-previa:
+    name: Vista previa del PR en GitHub Pages
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publicar o retirar la vista previa
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ github.event.action }}" = "closed" ]; then
+            sh herramientas/publicar-pages.sh "pr-preview/pr-${{ github.event.pull_request.number }}" remove
+          else
+            sh herramientas/publicar-pages.sh "pr-preview/pr-${{ github.event.pull_request.number }}"
+          fi
+      - name: Comentar el link en el PR
+        if: github.event.action != 'closed'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const url = `https://${context.repo.owner}.github.io/${context.repo.repo}/pr-preview/pr-${context.issue.number}/`;
+            const marca = '<!-- vista-previa -->';
+            const body = `${marca}\n**Vista previa de este PR:** ${url}\n\nSe actualiza con cada push y se retira al cerrar el PR. Puede tardar un minuto en reflejar el último cambio.`;
+            const { data: comentarios } = await github.rest.issues.listComments({ ...context.repo, issue_number: context.issue.number });
+            const previo = comentarios.find((c) => c.body && c.body.startsWith(marca));
+            if (previo) await github.rest.issues.updateComment({ ...context.repo, comment_id: previo.id, body });
+            else await github.rest.issues.createComment({ ...context.repo, issue_number: context.issue.number, body });
