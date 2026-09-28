@@ -1,69 +1,384 @@
 <!doctype html>
 <html lang="es-CL">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Sitio nuevo de la Casa de software</title>
-  <style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Casa de software de Álvaro Avaca</title>
+<style>
+  :root {
+    color-scheme: light dark;
+
+    --paper: #f6f1e8;
+    --paper-raised: #efe7d8;
+    --ink: #1c1a15;
+    --muted: #5c554a;
+    --accent: #e0641b;
+    --accent-ink: #a84a12;
+    --green-ink: #2e6b3e;
+    --rule: rgba(28, 26, 21, 0.2);
+
+    --badge-green-bg: rgba(46, 107, 62, 0.12);
+    --badge-accent-bg: rgba(224, 100, 27, 0.12);
+    --badge-gray-bg: rgba(92, 85, 74, 0.12);
+  }
+
+  @media (prefers-color-scheme: dark) {
     :root {
-      color-scheme: light dark;
-      --color-fondo: #ffffff;
-      --color-texto: #1a1a1a;
-      --color-borde: #d0d0d0;
-    }
+      --paper: #1c1917;
+      --paper-raised: #262220;
+      --ink: #f3ede2;
+      --muted: #b9b0a0;
+      --accent: #e0641b;
+      --accent-ink: #ff8c4a;
+      --green-ink: #6fbf7a;
+      --rule: rgba(243, 237, 226, 0.22);
 
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --color-fondo: #121212;
-        --color-texto: #f0f0f0;
-        --color-borde: #3a3a3a;
-      }
+      --badge-green-bg: rgba(111, 191, 122, 0.14);
+      --badge-accent-bg: rgba(255, 140, 74, 0.16);
+      --badge-gray-bg: rgba(185, 176, 160, 0.14);
     }
+  }
 
-    * {
-      box-sizing: border-box;
-    }
+  * { box-sizing: border-box; }
 
-    body {
-      margin: 0;
-      background: var(--color-fondo);
-      color: var(--color-texto);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.5;
-    }
+  html { -webkit-text-size-adjust: 100%; }
 
-    main {
-      max-width: 40rem;
-      margin: 0 auto;
-      padding: 2rem 16px;
-    }
+  body {
+    margin: 0;
+    padding: 0 1rem;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    h1 {
-      font-size: 1.75rem;
-    }
+  header, main, footer {
+    max-width: 38rem;
+    margin: 0 auto;
+    width: 100%;
+  }
 
-    section#estado-real {
-      margin-top: 2rem;
-      padding: 1rem;
-      border: 1px solid var(--color-borde);
-      border-radius: 0.5rem;
-    }
+  header {
+    padding: clamp(2.5rem, 8vw, 4.5rem) 0 clamp(1.5rem, 5vw, 2.5rem);
+  }
 
-    h2 {
-      margin-top: 0;
-      font-size: 1.1rem;
-    }
-  </style>
+  h1 {
+    font-family: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: clamp(1.9rem, 6vw, 2.6rem);
+    line-height: 1.15;
+    margin: 0 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .subtitle {
+    margin: 0;
+    max-width: 34rem;
+    color: var(--muted);
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    line-height: 1.6;
+  }
+
+  .flourish {
+    border: none;
+    border-top: 3px solid var(--accent);
+    width: 3.5rem;
+    margin: 1.75rem 0 0;
+  }
+
+  hr.rule {
+    border: none;
+    border-top: 1px solid var(--rule);
+    margin: clamp(2.25rem, 6vw, 3.5rem) 0;
+  }
+
+  section {
+    scroll-margin-top: 1.5rem;
+  }
+
+  .section-label {
+    margin: 0 0 0.6rem;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+  }
+
+  h2 {
+    font-family: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 4vw, 1.75rem);
+    line-height: 1.25;
+    margin: 0 0 1.1rem;
+  }
+
+  section > p {
+    margin: 0 0 1rem;
+    max-width: 38rem;
+  }
+
+  section > p:last-child {
+    margin-bottom: 0;
+  }
+
+  a {
+    color: var(--accent-ink);
+    text-decoration-line: underline;
+    text-decoration-color: var(--accent);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  a:focus-visible {
+    outline: 3px solid var(--accent-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ol.steps {
+    list-style: none;
+    counter-reset: paso;
+    margin: 0;
+    padding: 0;
+  }
+
+  ol.steps li {
+    counter-increment: paso;
+    position: relative;
+    padding: 0.15rem 0 1.15rem 2.5rem;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 1.15rem;
+  }
+
+  ol.steps li:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0.15rem;
+  }
+
+  ol.steps li::before {
+    content: counter(paso, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.1rem;
+    font-family: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent-ink);
+  }
+
+  ol.steps strong {
+    font-family: Georgia, "Iowan Old Style", Charter, "Times New Roman", serif;
+    font-weight: 700;
+  }
+
+  .table-wrap {
+    overflow-x: auto;
+    max-width: 38rem;
+  }
+
+  table {
+    width: 100%;
+    max-width: 38rem;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.92rem;
+  }
+
+  caption.sr-only,
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  thead th {
+    text-align: left;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--accent-ink);
+    padding: 0 0.5rem 0.6rem 0;
+    border-bottom: 2px solid var(--accent);
+  }
+
+  th:first-child, td:first-child { padding-left: 0; }
+  th:last-child, td:last-child { padding-right: 0; }
+
+  th:nth-child(1), td:nth-child(1) { width: 36%; }
+  th:nth-child(2), td:nth-child(2) { width: 30%; }
+  th:nth-child(3), td:nth-child(3) { width: 34%; }
+
+  tbody td {
+    padding: 0.75rem 0.5rem 0.75rem 0;
+    border-bottom: 1px solid var(--rule);
+    vertical-align: top;
+    overflow-wrap: break-word;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.2em 0.55em;
+    border-radius: 3px;
+    white-space: nowrap;
+    line-height: 1.5;
+  }
+
+  .badge-green {
+    color: var(--green-ink);
+    background: var(--badge-green-bg);
+    border: 1px solid var(--green-ink);
+  }
+
+  .badge-accent {
+    color: var(--accent-ink);
+    background: var(--badge-accent-bg);
+    border: 1px solid var(--accent-ink);
+  }
+
+  .badge-gray {
+    color: var(--muted);
+    background: var(--badge-gray-bg);
+    border: 1px solid var(--muted);
+  }
+
+  footer {
+    padding: 0 0 clamp(2.5rem, 8vw, 4rem);
+  }
+
+  .fine-print {
+    margin: 1.25rem 0 0;
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (min-width: 640px) {
+    body { padding: 0 2rem; }
+  }
+</style>
 </head>
 <body>
-  <main>
-    <h1>Sitio nuevo de la Casa de software</h1>
-    <p>Esta página es un marcador de posición que el proyecto reemplazará con contenido real.</p>
 
-    <section id="estado-real" aria-labelledby="estado-real-titulo">
-      <h2 id="estado-real-titulo">Estado real</h2>
-      <p>Todavía no hay nada publicado.</p>
-    </section>
-  </main>
+<header>
+  <h1>Casa de software de Álvaro Avaca</h1>
+  <p class="subtitle">Una casa de software dirigida por reglas fijas, construida por agentes de IA y aprobada por una sola persona: su dueño.</p>
+  <div class="flourish" aria-hidden="true"></div>
+</header>
+
+<main>
+
+  <section id="que-es" aria-labelledby="que-es-titulo">
+    <p class="section-label">01</p>
+    <h2 id="que-es-titulo">Qué es</h2>
+    <p>La Casa de software construye los programas que Álvaro Avaca necesita para sus empresas y, más adelante, para terceros. Los agentes de IA construyen. GitHub organiza cada encargo, entrega y aprobación. Un juez automático verifica cada cambio en una máquina limpia, con un navegador real. Álvaro aprueba mirando una demo, desde el celular.</p>
+    <p>Esta página es el primer programa que pasa por la Casa. Solo dice lo demostrado.</p>
+  </section>
+
+  <hr class="rule">
+
+  <section id="como-trabaja" aria-labelledby="como-trabaja-titulo">
+    <p class="section-label">02</p>
+    <h2 id="como-trabaja-titulo">Cómo trabaja</h2>
+    <ol class="steps">
+      <li><strong>Encargo —</strong> Álvaro cuenta qué necesita. Un entrevistador lo convierte en un brief de una página, con una pregunta a la vez.</li>
+      <li><strong>Propuesta —</strong> Un arquitecto propone el mapa, dos o tres estilos y una estimación honesta. Álvaro elige.</li>
+      <li><strong>Demo —</strong> Cada funcionalidad entra por una solicitud de cambio con su prueba de aceptación en español. El juez la corre. Álvaro la aprueba desde el celular.</li>
+      <li><strong>Producción —</strong> Se publica solo con la aprobación de Álvaro. Después se vigila, se respalda y se corrige por el mismo camino.</li>
+    </ol>
+  </section>
+
+  <hr class="rule">
+
+  <section id="estado-real" aria-labelledby="estado-real-titulo">
+    <p class="section-label">03</p>
+    <h2 id="estado-real-titulo">Estado real</h2>
+    <p>Solo lo demostrado, con su evidencia. Los enlaces marcados como privados abren únicamente con la cuenta del dueño.</p>
+    <div class="table-wrap">
+      <table>
+        <caption class="sr-only">Estado real de los entregables de la Casa de software</caption>
+        <thead>
+          <tr>
+            <th scope="col">Qué</th>
+            <th scope="col">Estado</th>
+            <th scope="col">Evidencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- estado-real:inicio -->
+<tr>
+  <td data-label="Qué">Arnés v3 (plantilla, reglas y juez)</td>
+  <td data-label="Estado"><span class="badge badge-green">Verificado</span> el 28-09-2026</td>
+  <td data-label="Evidencia"><a href="https://github.com/AlvaroAvaca/casa-de-software/actions/runs/36453113823">Corrida del juez en GitHub Actions (privado)</a></td>
+</tr>
+<tr>
+  <td data-label="Qué">Landing: brief (Parada 1)</td>
+  <td data-label="Estado"><span class="badge badge-accent">Aprobado</span> por Álvaro el 28-09-2026</td>
+  <td data-label="Evidencia"><a href="https://github.com/AlvaroAvaca/casa-de-software/pull/2">Registro de decisiones (privado)</a></td>
+</tr>
+<tr>
+  <td data-label="Qué">Landing: propuesta (Parada 2)</td>
+  <td data-label="Estado"><span class="badge badge-gray">Pendiente</span></td>
+  <td data-label="Evidencia">—</td>
+</tr>
+<tr>
+  <td data-label="Qué">Landing: publicación (Parada 4)</td>
+  <td data-label="Estado"><span class="badge badge-gray">Pendiente</span></td>
+  <td data-label="Evidencia">—</td>
+</tr>
+<tr>
+  <td data-label="Qué">Programas para las empresas</td>
+  <td data-label="Estado">0 entregados</td>
+  <td data-label="Evidencia">—</td>
+</tr>
+<!-- estado-real:fin -->
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section id="como-pedir" aria-labelledby="como-pedir-titulo">
+    <p class="section-label">04</p>
+    <h2 id="como-pedir-titulo">Cómo pedir un programa</h2>
+    <p>No hay formulario. Un programa se pide conversando con la Casa: qué se necesita, para quién y qué problema resuelve hoy. La Casa entrevista, propone, construye y muestra. Nada se publica sin la aprobación del dueño.</p>
+  </section>
+
+</main>
+
+<footer>
+  <hr class="rule">
+  <section id="privacidad" aria-labelledby="privacidad-titulo">
+    <p class="section-label">05</p>
+    <h2 id="privacidad-titulo">Privacidad</h2>
+    <p>Este sitio no usa cookies, formularios ni analítica, y no guarda datos de personas. Solo quedan los registros técnicos del proveedor de hosting (GitHub Pages, Estados Unidos). Código fuente: <a href="https://github.com/AlvaroAvaca/casa-de-software-landing">casa-de-software-landing</a></p>
+    <p class="fine-print">Construido con el arnés casa-de-software · 2026</p>
+  </section>
+</footer>
+
 </body>
 </html>
